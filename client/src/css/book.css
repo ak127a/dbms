@@ -1,0 +1,23 @@
+.book button {
+  width: 70%;
+  height: 40px;
+  background: rgb(63, 63, 63);
+  color: rgb(255, 255, 255);
+  box-shadow: none;
+  border: none;
+  margin-bottom: 10px;
+  border-radius: 7px;
+}
+
+.book button:hover {
+  cursor: pointer;
+}
+
+.book button :active {
+  border: none;
+  box-shadow: none;
+}
+
+.book button:focus {
+  outline: 0;
+}

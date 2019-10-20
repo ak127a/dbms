@@ -1,0 +1,129 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+#root {
+  height: 100%;
+  background: rgb(238, 238, 238);
+}
+
+/* @-webkit-keyframes AnimationName {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@-moz-keyframes AnimationName {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes AnimationName {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+} */
+
+.books-container {
+  display: grid;
+  margin: 150px 100px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 50px;
+  align-content: center;
+  align-items: center;
+  float: none;
+}
+
+.form-container {
+  margin-top: 100px !important;
+}
+
+.home-card-container {
+  width: 100%;
+}
+
+.home-card {
+  width: 70%;
+  margin: 60px auto 0 auto;
+  padding: 35px;
+  background: rgb(247, 247, 247);
+  border-radius: 5px;
+  /* box-shadow: 5px 10px 5px 10px #a1a1a17c; */
+}
+
+.home-card img {
+  margin: 0px auto;
+  display: block;
+  width: 55%;
+  padding: 30px 0 30px 0;
+}
+
+.home-card p {
+  font-size: 40px;
+  padding-bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.book {
+  text-align: center;
+  padding: 7px;
+  color: rgb(0, 0, 0);
+  background-color: rgba(255, 255, 255, 0.863);
+  border-radius: 10px;
+  /* border: 3px solid rgb(255, 255, 255); */
+}
+
+.book img {
+  margin-top: 20px;
+}
+
+@media only screen and (max-width: 1320px) {
+  .books-container {
+    grid-template-columns: 1fr 1fr;
+    margin: 40px 15px 10px 15px;
+  }
+}
+
+@media only screen and (max-width: 798px) {
+  .books-container {
+    grid-template-columns: 1fr;
+    margin: 40px 15px 100px 15px;
+  }
+
+  .home-card {
+    width: 90%;
+    margin: 50px auto 0 auto;
+  }
+
+  .home-card img {
+    margin: 0px auto;
+    display: block;
+    width: 90%;
+    padding: 20px 0 20px 0;
+  }
+
+  .home-card p {
+    font-size: 25px;
+    padding-bottom: 20px;
+    width: 100%;
+    text-align: center;
+  }
+}

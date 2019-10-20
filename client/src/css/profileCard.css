@@ -1,0 +1,85 @@
+.navigation {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.profile-card-container {
+  width: 100%;
+  align-items: center;
+  align-content: center;
+}
+
+.profile-card {
+  background: rgb(247, 247, 247);
+  margin: 60px auto 0 auto;
+  border-radius: 5px;
+  box-shadow: 5px 10px 5px 10px #a1a1a17c;
+}
+
+.profile-card h1 {
+  padding: 20px;
+  font-size: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.profile-card i {
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 10em;
+}
+
+.college-name-container {
+  padding: 50px 0 50px 0;
+  text-align: center;
+  width: 100%;
+}
+
+.stats-container {
+  padding: 0px 0 50px 0;
+  text-align: center;
+  width: 100%;
+}
+
+.stats-lend {
+  font-size: 25px;
+}
+
+.college-name {
+  font-size: 25px;
+}
+
+/* @keyframes line_animation {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+} */
+
+@keyframes line {
+  from {
+    left: 50%;
+    width: 0%;
+  }
+  to {
+    left: 5%;
+    width: 90%;
+  }
+}
+.line {
+  border-bottom: solid 2px #070707;
+  border-top-width: 0px;
+  display: block;
+  position: absolute;
+  left: 50%;
+  border-bottom: 2px solid rgb(77, 77, 77);
+  width: 0%;
+  /* animation-name: line_animation;
+  animation-duration: 1s;
+  animation-timing-function: linear; */
+  animation: line 1s linear forwards;
+}
