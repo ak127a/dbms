@@ -24,9 +24,6 @@ import "../css/navbar.css";
 
 class Header extends React.Component {
   renderLendingBorrowing = () => {
-    if (this.props.isSignedIn === null) {
-      return "Dunno";
-    }
     if (this.props.isSignedIn === true) {
       return [
         <li key="borrow">
@@ -46,6 +43,12 @@ class Header extends React.Component {
   showRegister = () => {
     console.log("showrgister called");
   };
+
+  componentDidMount() {
+    if (!this.props.isSignedIn) {
+      document.getElementById("my-profile").style.display = "none";
+    }
+  }
 
   componentDidUpdate() {
     if (this.props.isSignedIn === false) {
@@ -89,7 +92,6 @@ class Header extends React.Component {
 
   render() {
     console.log(this.props.isSignedIn);
-
     return (
       <section className="navigation">
         <div className="nav-container">
@@ -114,9 +116,9 @@ class Header extends React.Component {
                 </Link>
               </li>
               {this.renderLendingBorrowing()}
-              <li>
+              {/* <li>
                 <GoogleAuth />
-              </li>
+              </li> */}
               <li id="my-profile">
                 <a className="a" href="#123">
                   My Profile

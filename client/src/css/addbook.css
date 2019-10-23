@@ -2,7 +2,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40vh;
+  height: 70vh;
+}
+.loader-container {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
 }
 
 .ui.form {

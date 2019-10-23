@@ -2,7 +2,8 @@ import React from "react";
 import SimpleBar from "simplebar-react";
 import "../../css/main.css";
 import Book from "./Book";
-import "../../css/bookfilter.css";
+import "animate.css/animate.min.css";
+import ScrollAnimation from "react-animate-on-scroll";
 
 import "simplebar/dist/simplebar.min.css";
 import BookFilter from "./BookFilter";
@@ -14,6 +15,17 @@ class BookList extends React.Component {
   componentDidMount() {
     this.getBooks();
   }
+
+  getBooksWithFilters = whereClause => {
+    fetch(`http://localhost:4000/books?whereClause=${whereClause}`)
+      .then(response => response.json())
+      .then(res => {
+        this.setState({ books: res });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   getBooks = () => {
     fetch("http://localhost:4000/books")
@@ -28,17 +40,23 @@ class BookList extends React.Component {
 
   render() {
     const { books } = this.state;
+    console.log(this.state.books);
     return (
       <React.Fragment>
-        <BookFilter />
-        <SimpleBar style={{ height: "90vh" }}>
+        {/* <SimpleBar style={{ height: "90vh" }}> */}
+        <BookFilter
+          getBooksWithFilters={this.getBooksWithFilters}
+          onClear={this.getBooks}
+        />
+        <div className="books-outer-container">
           <div className="books-container">{books.map(this.renderBook)}</div>
-        </SimpleBar>
+        </div>
+        {/* </SimpleBar> */}
       </React.Fragment>
     );
   }
 
-  renderBook = ({ book_id, author }) => {
+  renderBook = ({ subject, title, book_id }) => {
     // return (
     //   <div key={book_id}>
     //     <h1>{book_id}</h1>
@@ -46,7 +64,11 @@ class BookList extends React.Component {
     //   </div>
     // );
 
-    return <Book book_id={book_id} author={author} />;
+    return (
+      <ScrollAnimation key={book_id} animateIn="bounceIn">
+        <Book title={title} subject={subject} />
+      </ScrollAnimation>
+    );
   };
 }
 

@@ -10,7 +10,8 @@ const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "password",
-  database: "sys"
+  database: "sys",
+  multipleStatements: true
 });
 
 app.use(cors());
@@ -36,13 +37,41 @@ connection.connect(function(err) {
 });
 
 app.get("/books/add", (req, res) => {
-  const { id, author } = req.query;
-  const INSERT_BOOK_QUERY = `insert into BOOKS values("${id}" , "${author}")`;
+  const {
+    // authors,
+    college,
+    date,
+    semester,
+    title,
+    subject,
+    condition,
+    userid
+  } = req.query;
+  const INSERT_BOOK_QUERY = `insert into BOOKS (userid , subject , semester , title , college , date , bookCondition ) values(${userid} , "${subject}" , ${semester} , "${title}" , "${college}" , "${date}" , "${condition}")`;
+  // var INSERT_AUTHORS = "";
+  // authors.forEach(author => {
+
+  // });
   connection.query(INSERT_BOOK_QUERY, (err, results) => {
     if (err) {
+      console.log(err);
       return res.send(err);
     } else {
+      console.log(results);
       res.send(results);
+    }
+  });
+});
+
+app.get("/authors", (req, res) => {
+  const { book_id, author } = req.query;
+  const INSERT_AUTHOR_QUERY = `insert into AUTHORS values(${book_id} , "${author}")`;
+  connection.query(INSERT_AUTHOR_QUERY, (err, results) => {
+    if (err) {
+      console.log(err);
+      return res.send(err);
+    } else {
+      return res.json(results);
     }
   });
 });
@@ -51,14 +80,42 @@ app.get("/", (req, res) => {
   res.send("hello from books server");
 });
 
-app.get("/books", (req, res) => {
-  connection.query(SELECT_ALL_BOOKS_QUERY, (err, results) => {
-    if (err) {
-      return res.send(err);
-    } else {
-      return res.json(results);
+app.get("/booksilent", (req, res) => {
+  const { user_id } = req.query;
+  connection.query(
+    `select * from BOOKS where userid=${user_id}`,
+    (err, results) => {
+      if (err) {
+        return res.send(err);
+      } else {
+        return res.json(results);
+      }
     }
-  });
+  );
+});
+
+app.get("/books", (req, res) => {
+  if (req.query.whereClause === undefined) {
+    connection.query(SELECT_ALL_BOOKS_QUERY, (err, results) => {
+      if (err) {
+        return res.send(err);
+      } else {
+        return res.json(results);
+      }
+    });
+  } else {
+    const whereClause = req.query.whereClause;
+    connection.query(
+      `${SELECT_ALL_BOOKS_QUERY} ${whereClause}`,
+      (err, results) => {
+        if (err) {
+          return res.send(err);
+        } else {
+          return res.json(results);
+        }
+      }
+    );
+  }
 });
 
 app.get("/signup", (req, res) => {

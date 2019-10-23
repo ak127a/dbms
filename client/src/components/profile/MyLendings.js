@@ -1,6 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
 import SimpleBar from "simplebar-react";
 import bookImg from "../../images/book.jpg";
+import "../../css/main.css";
+import "animate.css/animate.min.css";
+import ScrollAnimation from "react-animate-on-scroll";
 
 import "simplebar/dist/simplebar.min.css";
 class MyLendings extends React.Component {
@@ -13,9 +17,11 @@ class MyLendings extends React.Component {
   }
 
   getBooks = () => {
-    fetch("http://localhost:4000/books")
+    fetch(`http://localhost:4000/booksilent?user_id=${this.props.userId}`)
       .then(response => response.json())
       .then(res => {
+        console.log(res);
+
         this.setState({ books: res });
       })
       .catch(err => {
@@ -26,9 +32,9 @@ class MyLendings extends React.Component {
   render() {
     const { books } = this.state;
     return (
-      <SimpleBar style={{ height: "90vh" }}>
+      <div className="books-outer-container">
         <div className="books-container">{books.map(this.renderBook)}</div>
-      </SimpleBar>
+      </div>
     );
   }
 
@@ -41,13 +47,22 @@ class MyLendings extends React.Component {
     // );
 
     return (
-      <div className="book" key={book_id}>
-        <img src={bookImg} alt="bla" />
-        <h1>{book_id}</h1>
-        <h2>{author}</h2>
-      </div>
+      <ScrollAnimation key={book_id} animateIn="bounceIn">
+        <div className="book">
+          <img src={bookImg} alt="bla" />
+          <h1>{book_id}</h1>
+          <h2>{author}</h2>
+        </div>
+      </ScrollAnimation>
     );
   };
 }
 
-export default MyLendings;
+const mapStateToProps = state => {
+  return { isSignedIn: state.auth.isSignedIn, userId: state.auth.userId };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(MyLendings);
