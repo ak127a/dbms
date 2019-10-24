@@ -80,6 +80,17 @@ app.get("/", (req, res) => {
   res.send("hello from books server");
 });
 
+app.get("/user", (req, res) => {
+  const { usn } = req.query;
+  connection.query(`SELECT * FROM USERS WHERE usn=${usn}`, (err, results) => {
+    if (err) {
+      return res.send(err);
+    } else {
+      return res.json(results);
+    }
+  });
+});
+
 app.get("/booksilent", (req, res) => {
   const { user_id } = req.query;
   connection.query(
