@@ -83,7 +83,9 @@ app.get("/", (req, res) => {
 app.get("/history", (req, res) => {
   const { book_id } = req.query;
   var d = new Date().toISOString().slice(0, 10);
-  console.log(`INSERT INTO HISTORY values(${book_id} , "${d}")`);
+  console.log(
+    `INSERT INTO HISTORY(book_id,borrow_date) values(${book_id} , "${d}")`
+  );
   connection.query(
     `INSERT INTO HISTORY VALUES(${book_id} , "${d}")`,
     (err, results) => {
