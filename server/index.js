@@ -80,6 +80,24 @@ app.get("/", (req, res) => {
   res.send("hello from books server");
 });
 
+app.get("/history", (req, res) => {
+  const { book_id } = req.query;
+  var d = new Date().toISOString().slice(0, 10);
+  console.log(`INSERT INTO HISTORY values(${book_id} , "${d}")`);
+  connection.query(
+    `INSERT INTO HISTORY VALUES(${book_id} , "${d}")`,
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        return res.send(err);
+      } else {
+        console.log(results);
+        return res.json(results);
+      }
+    }
+  );
+});
+
 app.get("/user", (req, res) => {
   const { usn } = req.query;
   connection.query(`SELECT * FROM USERS WHERE usn=${usn}`, (err, results) => {

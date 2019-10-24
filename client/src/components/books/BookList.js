@@ -56,7 +56,7 @@ class BookList extends React.Component {
     );
   }
 
-  renderBook = ({ subject, title, book_id }) => {
+  renderBook = ({ semester, subject, title, book_id }) => {
     // return (
     //   <div key={book_id}>
     //     <h1>{book_id}</h1>
@@ -66,7 +66,12 @@ class BookList extends React.Component {
 
     return (
       <ScrollAnimation key={book_id} animateIn="bounceIn">
-        <Book title={title} subject={subject} />
+        <Book
+          title={title}
+          semester={semester}
+          subject={subject}
+          type="borrow"
+        />
       </ScrollAnimation>
     );
   };

@@ -13,19 +13,26 @@ class Book extends React.Component {
     e.target.className = "borrow";
   };
 
+  capitalizeFirstLetter = string => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   render() {
     return (
-      <div className="book" key={this.props.book_id}>
+      <div className="book">
         <img src={bookImg} alt="bla" />
         <h1>{this.props.title}</h1>
-        <h1>{this.props.subject}</h1>
+        <h2>Semester : {this.props.semester}</h2>
+        <h2>{this.props.subject}</h2>
         <div className="buttons container">
           <button
             onMouseEnter={this.animateButton}
             onMouseLeave={this.removeAnimation}
-            className="borrow"
+            className={this.props.type}
+            value={this.props.book_id}
+            onClick={this.props.onButtonClick}
           >
-            Borrow
+            {this.capitalizeFirstLetter(this.props.type)}
           </button>
         </div>
       </div>
