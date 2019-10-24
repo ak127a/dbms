@@ -110,11 +110,6 @@ class Header extends React.Component {
                   Home
                 </Link>
               </li>
-              <li>
-                <Link to="/books" className="a">
-                  Explore
-                </Link>
-              </li>
               {this.renderLendingBorrowing()}
               {/* <li>
                 <GoogleAuth />
