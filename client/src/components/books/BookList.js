@@ -1,5 +1,4 @@
 import React from "react";
-import SimpleBar from "simplebar-react";
 import "../../css/main.css";
 import "../../css/userdetails.css";
 import Book from "./Book";
@@ -8,26 +7,77 @@ import ScrollAnimation from "react-animate-on-scroll";
 
 import "simplebar/dist/simplebar.min.css";
 import BookFilter from "./BookFilter";
+import { setTimeout } from "timers";
 class BookList extends React.Component {
   state = {
     books: [],
     showDetails: false
   };
 
+  userDetailsObject = {
+    name: "Bla",
+    semester: 1,
+    college: "PES"
+  };
+
   componentDidMount() {
     this.getBooks();
   }
 
+  fetchUserDetails = e => {
+    var bookId = e.target.value;
+    // fetch(`http://localhost:4000/bookuserdetails?book_id=${bookId}`)
+    //   .then(res => res.json())
+    //   .then(res => {
+    //     this.userDetailsObject.name = res[0].name;
+    //     this.userDetailsObject.semester = res[0].semester;
+    //     this.userDetailsObject.college = res[0].college;
+    //   })
+    //   .catch(err => {
+    //     console.error(err);
+    //   });
+    fetch(`http://localhost:4000/userdetailsbook?book_id=${bookId}`)
+      .then(response => response.json())
+      .then(res => {
+        console.log(res[0].userid);
+
+        return res[0].userid;
+      })
+      .then(async userId => {
+        await Promise.all(
+          fetch(`http://localhost:4000/user?usn=${userId}`)
+            .then(res => res.json())
+            .then(res => {
+              console.log(res);
+              this.userDetailsObject.name = res[0].name;
+              this.userDetailsObject.semester = res[0].semester;
+              this.userDetailsObject.college = res[0].college;
+            })
+            .catch(err => console.error(err))
+        );
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   userDetails = () => {
+    console.log(this.userDetailsObject);
+
     return (
       <div className="user-details-outer-container">
-        <button
-          onClick={() => {
-            this.setState({ showDetails: false });
-          }}
-        >
-          Dismiss
-        </button>
+        <div className="user-details-card">
+          <div>Name: {this.userDetailsObject.name}</div>
+          <div>Semester: {this.userDetailsObject.semester}</div>
+          <div>College: {this.userDetailsObject.college}</div>
+          <button
+            onClick={() => {
+              this.setState({ showDetails: false });
+            }}
+          >
+            Dismiss
+          </button>
+        </div>
       </div>
     );
   };
@@ -86,7 +136,10 @@ class BookList extends React.Component {
   }
 
   handleClick = e => {
-    this.setState({ showDetails: true });
+    this.fetchUserDetails(e);
+    setTimeout(() => {
+      this.setState({ showDetails: true });
+    }, 200);
   };
 
   renderBook = ({ semester, subject, title, book_id }) => {

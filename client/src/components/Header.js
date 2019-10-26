@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import GoogleAuth from "./GoogleAuth";
 import { signOut } from "../actions";
 import { connect } from "react-redux";
 import logo from "../images/l5.png";

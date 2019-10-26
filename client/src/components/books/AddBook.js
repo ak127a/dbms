@@ -1,5 +1,6 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
+import { updateFooter } from "../../actions";
 import { connect } from "react-redux";
 import "../../css/main.css";
 import "../../css/navbar.css";
@@ -67,6 +68,7 @@ class AddBook extends React.Component {
               .then(res => {
                 console.log(res);
                 if (!alerted) {
+                  this.props.updateFooter();
                   setTimeout(() => {
                     alert("Book successfully added!");
                   }, 2010);
@@ -258,7 +260,7 @@ const mapStateToProps = state => {
 
 AddBook = connect(
   mapStateToProps,
-  null
+  { updateFooter }
 )(AddBook);
 
 export default reduxForm({

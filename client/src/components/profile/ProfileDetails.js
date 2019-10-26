@@ -11,7 +11,6 @@ class ProfileDeatils extends React.Component {
     var userId = this.props.userId;
     console.log("from ftc dtls" + userId);
 
-    var booksLent = 0;
     fetch(`http://localhost:4000/user?usn=${userId}`)
       .then(response => response.json())
       .then(res => {

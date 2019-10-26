@@ -3,7 +3,6 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import "../../css/login.css";
 import history from "../history";
-import cryptr from "../api/crypt";
 import crypto from "crypto";
 import { signIn } from "../../actions";
 

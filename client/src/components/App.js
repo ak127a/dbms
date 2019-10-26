@@ -10,6 +10,7 @@ import MyLendings from "./profile/MyLendings";
 import Logout from "./profile/Logout";
 import Login from "./user/Login";
 import SignOut from "./user/SignOut";
+import Footer from "./Footer";
 import Signup from "./user/Signup";
 import history from "./history";
 
@@ -17,6 +18,7 @@ const App = () => {
   return (
     <Router history={history}>
       <Header />
+      <Footer />
       <Route path="/" exact component={HomeSegment} />
       <Route path="/myprofile/details" exact component={ProfileDetails} />
       <Route path="/myprofile/lendings" exact component={MyLendings} />

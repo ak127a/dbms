@@ -1,8 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import SimpleBar from "simplebar-react";
-import bookImg from "../../images/book.jpg";
 import Book from "../books/Book";
+import { updateFooter } from "../../actions";
 import "../../css/main.css";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -25,7 +24,6 @@ class MyLendings extends React.Component {
       .then(response => response.json())
       .then(res => {
         console.log(res);
-
         this.setState({ books: res });
         // setTimeout(() => {
         //   this.setState({ loading: false });
@@ -69,6 +67,7 @@ class MyLendings extends React.Component {
       .then(res => res.json())
       .then(res => {
         console.log(res);
+        this.props.updateFooter();
         setTimeout(() => {
           this.setState({ loading: false });
         }, 1500);
@@ -108,5 +107,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  null
+  { updateFooter }
 )(MyLendings);

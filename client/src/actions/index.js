@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_OUT } from "./types";
+import { SIGN_IN, SIGN_OUT, UPDATE_FOOTER } from "./types";
 
 export const signIn = userId => {
   return {
@@ -10,5 +10,11 @@ export const signIn = userId => {
 export const signOut = () => {
   return {
     type: SIGN_OUT
+  };
+};
+
+export const updateFooter = () => {
+  return {
+    type: UPDATE_FOOTER
   };
 };
