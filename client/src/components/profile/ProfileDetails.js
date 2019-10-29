@@ -11,7 +11,7 @@ class ProfileDeatils extends React.Component {
     var userId = this.props.userId;
     console.log("from ftc dtls" + userId);
 
-    fetch(`http://localhost:4000/user?usn=${userId}`)
+    fetch(`http://192.168.43.195:4000/user?usn=${userId}`)
       .then(response => response.json())
       .then(res => {
         let userDetails = res[0];
@@ -28,7 +28,7 @@ class ProfileDeatils extends React.Component {
       //   await Promise.all(
       //     authorsArray.map(author => {
       //       return fetch(
-      //         `http://localhost:4000/authors?book_id=${bookId}&author=${author}`
+      //         `http://192.168.43.195:4000/authors?book_id=${bookId}&author=${author}`
       //       )
       //         .then(res => res.json())
       //         .then(res => {

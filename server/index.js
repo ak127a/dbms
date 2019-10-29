@@ -100,6 +100,30 @@ app.get("/history", (req, res) => {
   );
 });
 
+app.get("/stats", (req, res) => {
+  connection.query("SELECT * FROM STATS", (err, results) => {
+    if (err) {
+      return res.send(err);
+    } else {
+      return res.json(results);
+    }
+  });
+});
+
+app.get("/userdetailsbook", (req, res) => {
+  const { book_id } = req.query;
+  connection.query(
+    `select * from BOOKS where book_id=${book_id}`,
+    (err, results) => {
+      if (err) {
+        return res.send(err);
+      } else {
+        return res.json(results);
+      }
+    }
+  );
+});
+
 app.get("/user", (req, res) => {
   const { usn } = req.query;
   connection.query(`SELECT * FROM USERS WHERE usn=${usn}`, (err, results) => {
@@ -152,12 +176,11 @@ app.get("/books", (req, res) => {
 app.get("/signup", (req, res) => {
   console.log(req.query);
   const { name, password, usn, semester, college } = req.query;
-  const qr = `INSERT INTO USERS VALUES(${usn} , "${password}" , "${name}" , "${college}" , ${semester})`;
+  const qr = `INSERT INTO USERS VALUES(${usn} , "${password}" , "${name}" , "${college}" , ${semester} , 0)`;
   connection.query(qr, (err, results) => {
     if (err) {
       return res.send(err);
     } else {
-      console.log(res);
       return res.json(results);
     }
   });
@@ -170,7 +193,6 @@ app.get("/login", (req, res) => {
     if (err) {
       return res.send(err);
     } else {
-      console.log(res);
       return res.json(results);
     }
   });

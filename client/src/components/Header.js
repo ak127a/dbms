@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { signOut } from "../actions";
 import { connect } from "react-redux";
 import logo from "../images/l5.png";
+import { Animated } from "react-animated-css";
 import "../css/navbar.css";
 
 // const Header = () => {
@@ -93,47 +94,53 @@ class Header extends React.Component {
     console.log(this.props.isSignedIn);
     return (
       <section className="navigation">
-        <div className="nav-container">
-          <div className="brand">
-            <img src={logo} alt="bla" />
-          </div>
-          <nav>
-            <div className="nav-mobile">
-              <a id="nav-toggle" href="#!">
-                <span></span>
-              </a>
-            </div>
-            <ul className="nav-list">
-              <li>
-                <Link to="/" className="a">
-                  Home
-                </Link>
-              </li>
-              {this.renderLendingBorrowing()}
-              {/* <li>
+        <Animated animationIn="bounceInUp">
+          <div className="nav-container">
+            <Animated animationIn="slideInLeft" animationInDelay={300}>
+              <div className="brand">
+                <img src={logo} alt="bla" />
+              </div>
+            </Animated>
+            <Animated animationIn="slideInRight" animationInDelay={300}>
+              <nav>
+                <div className="nav-mobile">
+                  <a id="nav-toggle" href="#!">
+                    <span></span>
+                  </a>
+                </div>
+                <ul className="nav-list">
+                  <li>
+                    <Link to="/" className="a">
+                      Home
+                    </Link>
+                  </li>
+                  {this.renderLendingBorrowing()}
+                  {/* <li>
                 <GoogleAuth />
               </li> */}
-              <li id="my-profile">
-                <a className="a" href="#123">
-                  My Profile
-                </a>
-                <ul className="nav-dropdown">
-                  <li>
-                    <Link to="/myprofile/lendings" className="a">
-                      Lendings
-                    </Link>
+                  <li id="my-profile">
+                    <a className="a" href="#123">
+                      My Profile
+                    </a>
+                    <ul className="nav-dropdown">
+                      <li>
+                        <Link to="/myprofile/lendings" className="a">
+                          Lendings
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/myprofile/details" className="a">
+                          Details
+                        </Link>
+                      </li>
+                    </ul>
                   </li>
-                  <li>
-                    <Link to="/myprofile/details" className="a">
-                      Details
-                    </Link>
-                  </li>
+                  {this.loginItems()}
                 </ul>
-              </li>
-              {this.loginItems()}
-            </ul>
-          </nav>
-        </div>
+              </nav>
+            </Animated>
+          </div>
+        </Animated>
       </section>
     );
   }

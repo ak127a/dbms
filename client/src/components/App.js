@@ -15,6 +15,7 @@ import Signup from "./user/Signup";
 import history from "./history";
 
 const App = () => {
+  history.push("/");
   return (
     <Router history={history}>
       <Header />

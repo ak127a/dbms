@@ -1,5 +1,5 @@
 .books-filter-container {
-  width: 90%;
+  width: 80%;
   height: auto;
   padding: 10px;
   background: rgb(172, 172, 172);
@@ -28,6 +28,7 @@
   grid-template-columns: 1fr;
   text-align: center;
   line-height: 200%;
+  max-height: 80px;
   font-size: 20px;
 }
 

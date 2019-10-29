@@ -20,7 +20,7 @@ class MyLendings extends React.Component {
   }
 
   getBooks = () => {
-    fetch(`http://localhost:4000/booksilent?user_id=${this.props.userId}`)
+    fetch(`http://192.168.43.195:4000/booksilent?user_id=${this.props.userId}`)
       .then(response => response.json())
       .then(res => {
         console.log(res);
@@ -37,7 +37,6 @@ class MyLendings extends React.Component {
   render() {
     if (this.state.loading === true) {
       console.log("rendering the loader");
-
       return (
         <div className="loader-container">
           <Loader
@@ -47,6 +46,17 @@ class MyLendings extends React.Component {
             width={100}
             timeout={3000} //3 secs
           />
+        </div>
+      );
+    } else if (this.state.books.length === 0) {
+      return (
+        <div className="msg-container">
+          <ScrollAnimation animateIn="bounceInRight">
+            <div className="msg">
+              All your books have been borrowed!!! Or you have not lended any. I
+              don't know.
+            </div>
+          </ScrollAnimation>
         </div>
       );
     } else {
@@ -63,7 +73,7 @@ class MyLendings extends React.Component {
     console.log(e.target.value);
     const book_id = e.target.value;
     this.setState({ loading: true });
-    fetch(`http://localhost:4000/history?book_id=${book_id}`)
+    fetch(`http://192.168.43.195:4000/history?book_id=${book_id}`)
       .then(res => res.json())
       .then(res => {
         console.log(res);

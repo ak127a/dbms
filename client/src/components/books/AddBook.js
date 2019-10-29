@@ -7,6 +7,7 @@ import "../../css/navbar.css";
 import "../../css/addbook.css";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { Animated } from "react-animated-css";
 
 class AddBook extends React.Component {
   state = {
@@ -49,12 +50,13 @@ class AddBook extends React.Component {
       return item.trim();
     });
     fetch(
-      `http://localhost:4000/books/add?userid=${userId}&condition=${condition}&semester=${semester}&subject=${subject}&title=${title}&date=${date}&college=${college}&authors=${authors}`
+      `http://192.168.43.195:4000/books/add?userid=${userId}&condition=${condition}&semester=${semester}&subject=${subject}&title=${title}&date=${date}&college=${college}&authors=${authors}`
     )
       .then(response => response.json())
       .then(res => {
         book_id = res.insertId;
         console.log("From .then -->" + book_id);
+        this.props.updateFooter();
         return book_id;
       })
       .then(async bookId => {
@@ -62,13 +64,12 @@ class AddBook extends React.Component {
         await Promise.all(
           authorsArray.map(author => {
             return fetch(
-              `http://localhost:4000/authors?book_id=${bookId}&author=${author}`
+              `http://192.168.43.195:4000/authors?book_id=${bookId}&author=${author}`
             )
               .then(res => res.json())
               .then(res => {
                 console.log(res);
                 if (!alerted) {
-                  this.props.updateFooter();
                   setTimeout(() => {
                     alert("Book successfully added!");
                   }, 2010);
@@ -89,7 +90,7 @@ class AddBook extends React.Component {
     console.log(book_id);
 
     // authorsArray.forEach(author => {
-    //   fetch(`http://localhost:4000/author?book_id=${}`)
+    //   fetch(`http://192.168.43.195:4000/author?book_id=${}`)
     // });
   };
 
@@ -199,44 +200,46 @@ class AddBook extends React.Component {
       );
     } else {
       return (
-        <div className="ui container form-container">
-          <form
-            className="ui form error"
-            onSubmit={this.props.handleSubmit(this.onSubmit)}
-          >
-            <Field
-              name="authors"
-              component={this.renderInput}
-              label="Enter Authors(Separated by  , )"
-            />
-            <Field
-              name="title"
-              component={this.renderInput}
-              label="Enter Title"
-            />
-            <Field
-              name="subject"
-              component={this.renderSubjectSelection}
-              label="Select Subject"
-            />
-            <Field
-              name="semester"
-              component={this.renderSemesterSelection}
-              label="Select Semester"
-            />
-            <Field
-              name="college"
-              component={this.renderCollegeSelection}
-              label="Select College"
-            />
-            <Field
-              name="condition"
-              component={this.renderConditionSelection}
-              label="Select Condition"
-            />
-            <button className="ui button primary">Submit</button>
-          </form>
-        </div>
+        <Animated animationIn="slideInRight">
+          <div className="ui container form-container">
+            <form
+              className="ui form error"
+              onSubmit={this.props.handleSubmit(this.onSubmit)}
+            >
+              <Field
+                name="authors"
+                component={this.renderInput}
+                label="Enter Authors(Separated by  , )"
+              />
+              <Field
+                name="title"
+                component={this.renderInput}
+                label="Enter Title"
+              />
+              <Field
+                name="subject"
+                component={this.renderSubjectSelection}
+                label="Select Subject"
+              />
+              <Field
+                name="semester"
+                component={this.renderSemesterSelection}
+                label="Select Semester"
+              />
+              <Field
+                name="college"
+                component={this.renderCollegeSelection}
+                label="Select College"
+              />
+              <Field
+                name="condition"
+                component={this.renderConditionSelection}
+                label="Select Condition"
+              />
+              <button className="ui button primary">Submit</button>
+            </form>
+          </div>
+        </Animated>
       );
     }
   }

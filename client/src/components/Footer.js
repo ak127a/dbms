@@ -11,7 +11,7 @@ class Footer extends React.Component {
   componentDidMount() {
     console.log("FROM MOUNT " + this.props.noOfRerenders);
 
-    fetch("http://localhost:4000/stats")
+    fetch("http://192.168.43.195:4000/stats")
       .then(res => res.json())
       .then(res => {
         this.setState({
@@ -26,7 +26,7 @@ class Footer extends React.Component {
 
   componentWillReceiveProps() {
     console.log("FROM WILL RECIEVE PROPS " + this.props.noOfRerenders);
-    fetch("http://localhost:4000/stats")
+    fetch("http://192.168.43.195:4000/stats")
       .then(res => res.json())
       .then(res => {
         this.setState({

@@ -7,7 +7,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case UPDATE_FOOTER:
-      return { noOfRerenders: INITIAL_STATE.noOfRerenders + 1 };
+      return { noOfRerenders: state.noOfRerenders + 1 };
     default:
       return state;
   }

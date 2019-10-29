@@ -3,6 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import "../../css/signup.css";
 import crypto from "crypto";
+import { Animated } from "react-animated-css";
 
 class Signup extends React.Component {
   renderError({ error, touched }) {
@@ -65,7 +66,7 @@ class Signup extends React.Component {
     var enpw = enkey.update(password, "utf8", "hex");
     enpw += enkey.final("hex");
     fetch(
-      `http://localhost:4000/signup?usn=${usn}&name=${name}&password=${enpw}&semester=${semester}&college=${college}`
+      `http://192.168.43.195:4000/signup?usn=${usn}&name=${name}&password=${enpw}&semester=${semester}&college=${college}`
     )
       .then(res => res.json())
       .then(res => {
@@ -92,38 +93,44 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div className="ui container form-container">
-        <form
-          className="signup ui form error"
-          onSubmit={this.props.handleSubmit(this.onSubmit)}
-        >
-          <Field name="usn" component={this.renderInput} label="Enter USN" />
-          <Field name="name" component={this.renderInput} label="Enter Name" />
-          <Field
-            name="password"
-            component={this.renderInput}
-            label="Enter Password"
-            type="password"
-          />
-          <Field
-            name="confirmpassword"
-            component={this.renderInput}
-            label="Enter Confirm Password"
-            type="password"
-          />
-          <Field
-            name="semester"
-            component={this.renderSemesterSelection}
-            label="Select Semester"
-          />
-          <Field
-            name="college"
-            component={this.renderCollegeSelection}
-            label="Select College"
-          />
-          <button className="ui button primary">Signup</button>
-        </form>
-      </div>
+      <Animated animationIn="fadeInRight">
+        <div className="ui container form-container">
+          <form
+            className="signup ui form error"
+            onSubmit={this.props.handleSubmit(this.onSubmit)}
+          >
+            <Field name="usn" component={this.renderInput} label="Enter USN" />
+            <Field
+              name="name"
+              component={this.renderInput}
+              label="Enter Name"
+            />
+            <Field
+              name="password"
+              component={this.renderInput}
+              label="Enter Password"
+              type="password"
+            />
+            <Field
+              name="confirmpassword"
+              component={this.renderInput}
+              label="Enter Confirm Password"
+              type="password"
+            />
+            <Field
+              name="semester"
+              component={this.renderSemesterSelection}
+              label="Select Semester"
+            />
+            <Field
+              name="college"
+              component={this.renderCollegeSelection}
+              label="Select College"
+            />
+            <button className="ui button primary">Signup</button>
+          </form>
+        </div>
+      </Animated>
     );
   }
 }

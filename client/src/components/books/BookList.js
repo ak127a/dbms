@@ -3,6 +3,7 @@ import "../../css/main.css";
 import "../../css/userdetails.css";
 import Book from "./Book";
 import "animate.css/animate.min.css";
+import { Animated } from "react-animated-css";
 import ScrollAnimation from "react-animate-on-scroll";
 
 import "simplebar/dist/simplebar.min.css";
@@ -26,7 +27,7 @@ class BookList extends React.Component {
 
   fetchUserDetails = e => {
     var bookId = e.target.value;
-    // fetch(`http://localhost:4000/bookuserdetails?book_id=${bookId}`)
+    // fetch(`http://192.168.43.195:4000/bookuserdetails?book_id=${bookId}`)
     //   .then(res => res.json())
     //   .then(res => {
     //     this.userDetailsObject.name = res[0].name;
@@ -36,7 +37,7 @@ class BookList extends React.Component {
     //   .catch(err => {
     //     console.error(err);
     //   });
-    fetch(`http://localhost:4000/userdetailsbook?book_id=${bookId}`)
+    fetch(`http://192.168.43.195:4000/userdetailsbook?book_id=${bookId}`)
       .then(response => response.json())
       .then(res => {
         console.log(res[0].userid);
@@ -45,7 +46,7 @@ class BookList extends React.Component {
       })
       .then(async userId => {
         await Promise.all(
-          fetch(`http://localhost:4000/user?usn=${userId}`)
+          fetch(`http://192.168.43.195:4000/user?usn=${userId}`)
             .then(res => res.json())
             .then(res => {
               console.log(res);
@@ -83,7 +84,7 @@ class BookList extends React.Component {
   };
 
   getBooksWithFilters = whereClause => {
-    fetch(`http://localhost:4000/books?whereClause=${whereClause}`)
+    fetch(`http://192.168.43.195:4000/books?whereClause=${whereClause}`)
       .then(response => response.json())
       .then(res => {
         this.setState({ books: res });
@@ -94,7 +95,7 @@ class BookList extends React.Component {
   };
 
   getBooks = () => {
-    fetch("http://localhost:4000/books")
+    fetch("http://192.168.43.195:4000/books")
       .then(response => response.json())
       .then(res => {
         this.setState({ books: res });
@@ -145,16 +146,18 @@ class BookList extends React.Component {
   renderBook = ({ semester, subject, title, book_id }) => {
     return (
       <ScrollAnimation key={book_id} animateIn="bounceIn">
-        <Book
-          title={title}
-          book_id={book_id}
-          semester={semester}
-          subject={subject}
-          type="borrow"
-          onButtonClick={e => {
-            this.handleClick(e);
-          }}
-        />
+        <Animated animationIn="flipInX">
+          <Book
+            title={title}
+            book_id={book_id}
+            semester={semester}
+            subject={subject}
+            type="borrow"
+            onButtonClick={e => {
+              this.handleClick(e);
+            }}
+          />
+        </Animated>
       </ScrollAnimation>
     );
   };
