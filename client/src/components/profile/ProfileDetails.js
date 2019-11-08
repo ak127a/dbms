@@ -60,7 +60,11 @@ class ProfileDeatils extends React.Component {
     return (
       <div className="profile-card-container">
         <div className="profile-card">
-          <i class="fa fa-5x fa-user-circle" aria-hidden="true"></i>
+          <i
+            style={{ width: "100%", marginTop: "50px", fontSize: "9em" }}
+            class="fa fa-5x fa-user-circle"
+            aria-hidden="true"
+          ></i>
           <h1>{this.state.details.name}</h1>
           <hr className="line" />
           <div className="college-name-container">

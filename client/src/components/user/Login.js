@@ -74,23 +74,32 @@ class Login extends React.Component {
 
   render() {
     return (
-      <Animated animationIn="slideInLeft">
-        <div className="ui container form-container">
-          <form
-            className="login ui form error"
-            onSubmit={this.props.handleSubmit(this.onSubmit)}
-          >
-            <Field name="usn" component={this.renderInput} label="Enter USN" />
-            <Field
-              name="password"
-              component={this.renderInput}
-              label="Enter Password"
-              type="password"
-            />
-            <button className="ui button primary">Login</button>
-          </form>
-        </div>
-      </Animated>
+      <React.Fragment>
+        <Animated animationIn="bounceInRight">
+          <div className="login-heading">LOGIN</div>
+        </Animated>
+        <Animated animationIn="slideInLeft">
+          <div className="ui container form-container">
+            <form
+              className="login ui form error"
+              onSubmit={this.props.handleSubmit(this.onSubmit)}
+            >
+              <Field
+                name="usn"
+                component={this.renderInput}
+                label="Enter USN"
+              />
+              <Field
+                name="password"
+                component={this.renderInput}
+                label="Enter Password"
+                type="password"
+              />
+              <button className="ui button primary">Login</button>
+            </form>
+          </div>
+        </Animated>
+      </React.Fragment>
     );
   }
 }

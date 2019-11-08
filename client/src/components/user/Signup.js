@@ -93,44 +93,53 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <Animated animationIn="fadeInRight">
-        <div className="ui container form-container">
-          <form
-            className="signup ui form error"
-            onSubmit={this.props.handleSubmit(this.onSubmit)}
-          >
-            <Field name="usn" component={this.renderInput} label="Enter USN" />
-            <Field
-              name="name"
-              component={this.renderInput}
-              label="Enter Name"
-            />
-            <Field
-              name="password"
-              component={this.renderInput}
-              label="Enter Password"
-              type="password"
-            />
-            <Field
-              name="confirmpassword"
-              component={this.renderInput}
-              label="Enter Confirm Password"
-              type="password"
-            />
-            <Field
-              name="semester"
-              component={this.renderSemesterSelection}
-              label="Select Semester"
-            />
-            <Field
-              name="college"
-              component={this.renderCollegeSelection}
-              label="Select College"
-            />
-            <button className="ui button primary">Signup</button>
-          </form>
-        </div>
-      </Animated>
+      <React.Fragment>
+        <Animated animationIn="bounceInLeft">
+          <div className="signup-heading">SIGNUP</div>
+        </Animated>
+        <Animated animationIn="fadeInRight">
+          <div className="ui container form-container">
+            <form
+              className="signup ui form error"
+              onSubmit={this.props.handleSubmit(this.onSubmit)}
+            >
+              <Field
+                name="usn"
+                component={this.renderInput}
+                label="Enter USN"
+              />
+              <Field
+                name="name"
+                component={this.renderInput}
+                label="Enter Name"
+              />
+              <Field
+                name="password"
+                component={this.renderInput}
+                label="Enter Password"
+                type="password"
+              />
+              <Field
+                name="confirmpassword"
+                component={this.renderInput}
+                label="Enter Confirm Password"
+                type="password"
+              />
+              <Field
+                name="semester"
+                component={this.renderSemesterSelection}
+                label="Select Semester"
+              />
+              <Field
+                name="college"
+                component={this.renderCollegeSelection}
+                label="Select College"
+              />
+              <button className="ui button primary">Signup</button>
+            </form>
+          </div>
+        </Animated>
+      </React.Fragment>
     );
   }
 }

@@ -53,7 +53,7 @@ class MyLendings extends React.Component {
         <div className="msg-container">
           <ScrollAnimation animateIn="bounceInRight">
             <div className="msg">
-              All your books have been borrowed!!! Or you have not lended any. I
+              All your books have been borrowed!!! Or you have not lent any. I
               don't know.
             </div>
           </ScrollAnimation>
